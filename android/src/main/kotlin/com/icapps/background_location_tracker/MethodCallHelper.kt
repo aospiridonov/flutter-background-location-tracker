@@ -15,6 +15,7 @@ import com.icapps.background_location_tracker.utils.SharedPrefsUtil
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
+
 internal class MethodCallHelper(private val ctx: Context) : MethodChannel.MethodCallHandler, LifecycleObserver, LocationUpdateListener {
 
     private var serviceConnection = LocationServiceConnection(this)

@@ -8,8 +8,8 @@
     <application>
         <service
             android:name=".service.LocationUpdatesService"
+            android:foregroundServiceType="location"
             android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="location" />
+            android:exported="true" />
     </application>
 </manifest>
