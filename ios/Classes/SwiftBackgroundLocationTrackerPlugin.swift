@@ -119,11 +119,12 @@ extension SwiftBackgroundLocationTrackerPlugin: CLLocationManagerDelegate {
             return
         }
         
-        CustomLogger.log(message: "NEW LOCATION: \(location.coordinate.latitude): \(location.coordinate.longitude)")
+        CustomLogger.log(message: "NEW LOCATION: \(location.coordinate.latitude): \(location.coordinate.longitude), ALTITUDE: \(location.altitude)")
         
         let locationData: [String: Any] = [
             "lat": location.coordinate.latitude,
             "lon": location.coordinate.longitude,
+            "alt": location.altitude,
             "logging_enabled": SharedPrefsUtil.isLoggingEnabled(),
         ]
         

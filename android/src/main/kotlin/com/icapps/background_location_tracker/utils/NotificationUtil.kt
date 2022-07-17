@@ -58,7 +58,7 @@ internal object NotificationUtil {
         }
 
         val text = if (SharedPrefsUtil.isNotificationLocationUpdatesEnabled(context)) {
-            if (location == null) "Unknown location" else "(" + location.latitude + ", " + location.longitude + ")"
+            if (location == null) "Unknown location" else "(" + location.latitude + ", " + location.longitude + ")" + "alt: " + location.altitude
         } else {
             SharedPrefsUtil.getNotificationBody(context)
         }

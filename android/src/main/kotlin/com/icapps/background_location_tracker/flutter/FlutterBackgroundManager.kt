@@ -27,7 +27,7 @@ internal object FlutterBackgroundManager {
     }
 
     fun sendLocation(ctx: Context, location: Location) {
-        Logger.debug("BackgroundManager", "Location: ${location.latitude}: ${location.longitude}")
+        Logger.debug("BackgroundManager", "Location: ${location.latitude}: ${location.longitude}, altitude: ${location.altitude}")
         val engine = getInitializedFlutterEngine(ctx)
 
         val backgroundChannel = MethodChannel(engine.dartExecutor, BACKGROUND_CHANNEL_NAME)
@@ -51,6 +51,7 @@ internal object FlutterBackgroundManager {
         val data = mutableMapOf<String, Any>()
         data["lat"] = location.latitude
         data["lon"] = location.longitude
+        data["alt"] = location.altitude
         data["logging_enabled"] = SharedPrefsUtil.isLoggingEnabled(ctx)
         channel.invokeMethod("onLocationUpdate", data, object : MethodChannel.Result {
             override fun success(result: Any?) {
@@ -58,7 +59,7 @@ internal object FlutterBackgroundManager {
                 engine.destroy()
             }
 
-            override fun error(errorCode: String?, errorMessage: String?, errorDetails: Any?) {
+            override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
                 Logger.debug("BackgroundManager", "Got error, destroy engine! $errorCode - $errorMessage : $errorDetails")
                 engine.destroy()
             }

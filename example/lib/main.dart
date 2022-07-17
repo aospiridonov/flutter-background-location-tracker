@@ -102,6 +102,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _requestLocationPermission() async {
+    await Permission.locationWhenInUse.request();
     final result = await Permission.locationAlways.request();
     if (result == PermissionStatus.granted) {
       print('GRANTED'); // ignore: avoid_print
@@ -128,7 +129,8 @@ class Repo {
   factory Repo() => _instance ??= Repo._();
 
   void update(BackgroundLocationUpdateData data) {
-    final text = 'Location Update: Lat: ${data.lat} Lon: ${data.lon}';
+    final text =
+        'Location Update: Lat: ${data.lat} Lon: ${data.lon} Alt: ${data.alt}';
     print(text); // ignore: avoid_print
     sendNotification(text);
   }
@@ -152,7 +154,8 @@ void sendNotification(String text) {
     'Title',
     text,
     const NotificationDetails(
-      android: AndroidNotificationDetails('test_notification', 'Test', 'Test'),
+      android: AndroidNotificationDetails('test_notification', 'Test',
+          channelDescription: 'Test'),
       iOS: IOSNotificationDetails(),
     ),
   );

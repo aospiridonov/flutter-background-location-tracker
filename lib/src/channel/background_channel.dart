@@ -36,7 +36,8 @@ class BackgroundChannel {
     BackgroundLocationTrackerLogger.log('locationUpdate: ${call.arguments}');
     final lat = data['lat'] as double; // ignore: avoid_as
     final lon = data['lon'] as double; // ignore: avoid_as
-    await callback(BackgroundLocationUpdateData(lat: lat, lon: lon));
+    final alt = data['alt'] as double; // ignore: avoid_as
+    await callback(BackgroundLocationUpdateData(lat: lat, lon: lon, alt: alt));
     return true;
   }
 }
